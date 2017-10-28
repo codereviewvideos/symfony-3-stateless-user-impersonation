@@ -30,13 +30,14 @@ class ProfileController extends FOSRestController implements ClassResourceInterf
         UserInterface $user
     )
     {
-//        if ($authorizationChecker->isGranted('ROLE_PREVIOUS_ADMIN')) {
-//            foreach ($tokenStorage->getToken()->getRoles() as $role) {
-//                if ($role instanceof SwitchUserRole) {
-//                    return $user;
-//                }
-//            }
-//        }
+
+        if ($authorizationChecker->isGranted('ROLE_PREVIOUS_ADMIN')) {
+            foreach ($tokenStorage->getToken()->getRoles() as $role) {
+                if ($role instanceof SwitchUserRole) {
+                    return $user;
+                }
+            }
+        }
 
         if ($user === $this->getUser()) {
             return $user;
