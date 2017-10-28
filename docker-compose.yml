@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+
+    db:
+        image: mysql:5.7.20
+        hostname: db
+        volumes:
+          - "./volumes/mysql_dev:/var/lib/mysql"
+        env_file:
+          - "./.env"
+
+    nginx:
+        image: docker.io/codereviewvideos/nginx.symfony.dev
+        hostname: nginx
+        volumes:
+          - "./volumes/nginx/logs:/var/log/nginx/"
+          - "./:/var/www/dev"
+        ports:
+          - 81:80
+        depends_on:
+          - php
+        restart: always
+
+    php:
+        image: docker.io/codereviewvideos/symfony.dev
+        hostname: php
+        volumes:
+          - "./volumes/php/var/cache:/var/www/dev/var/cache/:rw"
+          - "./volumes/php/var/sessions:/var/www/dev/var/sessions/:rw"
+          - "./volumes/php/var/logs:/var/www/dev/var/logs/:rw"
+          - "./:/var/www/dev"
+        env_file:
+          - "./.env"
+        depends_on:
+          - db
