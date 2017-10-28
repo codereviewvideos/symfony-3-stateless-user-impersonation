@@ -5,6 +5,8 @@ services:
     db:
         image: mysql:5.7.20
         hostname: db
+        ports:
+          - 33061:3306
         volumes:
           - "./volumes/mysql_dev:/var/lib/mysql"
         env_file:

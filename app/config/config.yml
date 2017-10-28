@@ -111,3 +111,12 @@ lexik_jwt_authentication:
     public_key_path:  "%jwt_public_key_path%"
     pass_phrase:      "%jwt_key_pass_phrase%"
     token_ttl:        "%jwt_token_ttl%"
+
+# FOS User Bundle
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    from_email:
+        address:        "%fos_user_from_email_address%"
+        sender_name:    "%fos_user_from_email_name%"
