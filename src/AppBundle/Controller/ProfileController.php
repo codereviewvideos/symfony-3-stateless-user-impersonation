@@ -6,7 +6,6 @@ use FOS\RestBundle\Controller\Annotations;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
-use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -21,17 +20,15 @@ class ProfileController extends FOSRestController implements ClassResourceInterf
      *
      * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
      */
-    public function getAction(
-        UserInterface $user
-    )
+    public function getAction()
     {
-        if ($user === $this->getUser()) {
-            return $user;
+        if (null === $this->getUser()) {
+            return new JsonResponse(
+                'Access denied',
+                JsonResponse::HTTP_FORBIDDEN
+            );
         }
 
-        return new JsonResponse(
-            'Access denied',
-            JsonResponse::HTTP_FORBIDDEN
-        );
+        return $this->getUser();
     }
 }
