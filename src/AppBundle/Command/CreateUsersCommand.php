@@ -104,7 +104,7 @@ class CreateUsersCommand extends Command
                 ->createUser()
                 ->setUsername('admin')
                 ->setEmail('admin@example.com')
-                ->addRole('ROLE_SUPER_ADMIN')
+                ->addRole('ROLE_ADMIN')
                 ->setPlainPassword('admin')
                 ->setEnabled(true)
         );
