@@ -7,7 +7,6 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @RouteResource("profile", pluralize=false)
@@ -16,7 +15,6 @@ class ProfileController extends FOSRestController implements ClassResourceInterf
 {
     /**
      * @Annotations\Get("/profile")
-     * @ParamConverter("user", class="AppBundle:User")
      *
      * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
      */
